@@ -1,0 +1,12 @@
+{% extends 'Binary/main.html' %}
+
+{% block content %}
+
+<ul>
+    {% for name in names %}
+    <li>{{name}}</li>>
+    {% endfor %}
+</ul>
+<a href="{% url 'Home' %}">Back to HomePage</a>
+
+{% endblock %}

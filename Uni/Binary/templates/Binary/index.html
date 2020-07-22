@@ -1,11 +1,12 @@
 {% extends 'Binary/main.html' %}
 
 {% block content %}
+<div>
+    <a href="{% url 'binarycheck' %}">Do a Binary Check</a>
+</div>
+<div>
+    <a href="{% url 'apiquery' %}">Github Api Query</a>
+</div>
 
-<form action="/" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
 
 {% endblock %}
