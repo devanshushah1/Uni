@@ -8,3 +8,7 @@ class NumberForm(forms.Form):
 
 class UserNameForm(forms.Form):
     username = forms.CharField(max_length=200, label='Enter Username')
+
+
+class DataQueryForm(forms.Form):
+    repo_count = forms.IntegerField(label='Enter Repo Count')

@@ -1,0 +1,24 @@
+{% extends 'Binary/main.html' %}
+
+{% block content %}
+
+<form action="{% url 'dataquery' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% if result %}
+
+{% for obj in result %}
+    <p>{{obj}}</p>
+    <hr>
+{% endfor %}
+
+{% endif %}
+<div>
+    <a href="{% url 'Home' %}">Back to HomePage</a>
+</div>
+
+
+{% endblock %}

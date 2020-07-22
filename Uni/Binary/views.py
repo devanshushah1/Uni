@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from . import CheckAdjacent
-from .forms import NumberForm, UserNameForm
+from .forms import NumberForm, UserNameForm, DataQueryForm
 import requests
+from .models import *
 # Create your views here.
 # from .CheckAdjacent import CheckAdjacent
 
@@ -44,10 +45,47 @@ def ApiQuery(request):
 
 def QueryResult(request, username):
     response = requests.get('https://api.github.com/users/' + username + '/repos')
-    user_data = response.json()
     name_list = []
-    for i in user_data:
-        name_list.append(i['name'])
-    context = {'names': name_list}
+    username_dict = GitQuery.objects.all().values('username')
+    username_list = []
+    for k in username_dict:
+        username_list.append(k['username'])
 
+    if response:
+        user_data = response.json()
+        for i in user_data:
+            name_list.append(i['name'])
+        repo_count = len(name_list)
+        if username in username_list:
+            obj = GitQuery.objects.get(username=username)
+            obj.repo_count = repo_count
+            obj.save()
+
+        else:
+            GitQuery.objects.create(username=username, repo_count=repo_count)
+    error = 'User Not Found'
+
+    context = {'names': name_list, 'error': error}
     return render(request, 'Binary/queryresult.html', context)
+
+
+def dataquery(request):
+    form = DataQueryForm()
+    result = None
+    if request.method == 'POST':
+        form = DataQueryForm(request.POST)
+        if form.is_valid():
+            repo_count = form.cleaned_data['repo_count']
+            result = GitQuery.objects.filter(repo_count=repo_count)
+            for obj in result:
+                obj.count += 1
+                obj.save()
+
+    context = {'form': form, 'result': result}
+    return render(request, 'Binary/dataquery.html', context)
+
+
+def Top3(request):
+    ans = GitQuery.objects.order_by('-count')[:3]
+    context = {'ans': ans}
+    return render(request, 'Binary/top3.html', context)

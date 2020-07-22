@@ -3,9 +3,19 @@
 {% block content %}
 
 <ul>
+    {% if names %}
     {% for name in names %}
-    <li>{{name}}</li>>
+        <li>{{name}}</li>>
     {% endfor %}
+    {% else %}
+        <div>
+            {{error}}
+        </div>
+        <div>
+            <a href="{% url 'apiquery' %}">OOPS! Try again?</a>
+        </div>
+
+    {% endif %}
 </ul>
 <a href="{% url 'Home' %}">Back to HomePage</a>
 
