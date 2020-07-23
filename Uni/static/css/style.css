@@ -1,0 +1,50 @@
+body{
+    background-color:#f4f4f4;
+    color:#555555;
+    font: normal 16px Arial, Helvetica, sans-serif;
+    line-height:1.6em;
+}
+
+
+.container{
+    width:80%;
+    min-height:30px;
+    margin:auto;
+    position:relative;
+    top:100px;
+}
+
+.links{
+    float:left;
+    width:25%;
+    box-sizing:border-box;
+}
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+
+.clr{
+    clear:both;
+}
+
+label{
+    display:block;
+}
+
+.result{
+    width:30%;
+    margin:auto;
+    background-color:black;
+    color:white;
+    text-align:center;
+}

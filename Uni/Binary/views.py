@@ -45,7 +45,9 @@ def ApiQuery(request):
 
 def QueryResult(request, username):
     response = requests.get('https://api.github.com/users/' + username + '/repos')
+    response2 = requests.get('https://api.github.com/users/' + username + '/followers')
     name_list = []
+    follower_list = []
     username_dict = GitQuery.objects.all().values('username')
     username_list = []
     for k in username_dict:
@@ -60,12 +62,19 @@ def QueryResult(request, username):
             obj = GitQuery.objects.get(username=username)
             obj.repo_count = repo_count
             obj.save()
+    if response2:
+        folo_data = response2.json()
+        for i in folo_data:
+            follower_list.append(i['login'])
+        folo_count = len(follower_list)
+        if username in username_list:
+            pass
 
         else:
-            GitQuery.objects.create(username=username, repo_count=repo_count)
+            GitQuery.objects.create(username=username, repo_count=repo_count, folo_count=folo_count)
     error = 'User Not Found'
 
-    context = {'names': name_list, 'error': error}
+    context = {'names': name_list, 'error': error, 'followers': follower_list}
     return render(request, 'Binary/queryresult.html', context)
 
 

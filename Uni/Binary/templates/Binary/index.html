@@ -1,16 +1,16 @@
 {% extends 'Binary/main.html' %}
-
+{% load static %}
 {% block content %}
-<div>
+<div class='links button'>
     <a href="{% url 'binarycheck' %}">Do a Binary Check</a>
 </div>
-<div>
+<div class='links button'>
     <a href="{% url 'apiquery' %}">Github Api Query</a>
 </div>
-<div>
+<div class='links button'>
     <a href="{% url 'dataquery' %}">Data Query</a>
 </div>
-<div>
+<div class='links button'>
     <a href="{% url 'top3' %}">Top 3 DB Queries</a>
 </div>
 

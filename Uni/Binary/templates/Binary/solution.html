@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    {{answer}}
+{% extends 'Binary/main.html' %}
+
+{% block content %}
+    <div class="result">
+        {{answer}}
+    </div>
     <a href="{% url 'Home' %}">Back to HomePage</a>
-</body>
-</html>
+
+{% endblock %}
+
+
+

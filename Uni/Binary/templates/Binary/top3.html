@@ -2,12 +2,13 @@
 
 {% block content %}
 
-<ol>
-    {% for i in ans %}
-        <li>{{i}}</li>>
-        <hr>
-    {% endfor %}
-</ol>
+<p>Top 3 users queried are:</p>
+{% for i in ans %}
+    <div class="result">
+        <p>{{i}}</p>
+    </div>
+{% endfor %}
+
 
 <a href="{% url 'Home' %}">Return to HomePage</a>
 

@@ -2,21 +2,35 @@
 
 {% block content %}
 
-<ul>
-    {% if names %}
-    {% for name in names %}
-        <li>{{name}}</li>>
-    {% endfor %}
-    {% else %}
-        <div>
-            {{error}}
-        </div>
-        <div>
-            <a href="{% url 'apiquery' %}">OOPS! Try again?</a>
-        </div>
+<div>
+    <div>
+        {% if names %}
+            <h3>Repositories:</h3>
+        <div class="result">
+            {% for name in names %}
+                <p>{{name}}</p>
 
-    {% endif %}
-</ul>
+            {% endfor %}
+        </div>
+        {% else %}
+            <div>
+                {{error}}
+            </div>
+            <div>
+                <a href="{% url 'apiquery' %}">OOPS! Try again?</a>
+            </div>
+
+        {% endif %}
+    </div>
+    {% if followers %}
+    <h3>Followers:</h3>
+    <div class="result">
+        {% for i in followers %}
+            <p>{{i}}</p>
+        {% endfor %}
+    </div>
+    {%endif %}
+</div>
 <a href="{% url 'Home' %}">Back to HomePage</a>
 
 {% endblock %}
